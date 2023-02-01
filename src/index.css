@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-logo {
+    font-family: Brush Script MT;
+    font-size: larger;
+}
+
+.modal-show {
+    display: block;
+}
+
+.modal-hide {
+    display: none;
+}
