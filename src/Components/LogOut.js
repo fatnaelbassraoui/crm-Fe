@@ -1,10 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const LogOut = () => {
+    const navigate = useNavigate()
     const userLogOut = () => {
         sessionStorage.clear()
         setTimeout(() => {
-            window.location.reload(false)
+            navigate('../', { replace: true })
         }, 800)
     }
     return (

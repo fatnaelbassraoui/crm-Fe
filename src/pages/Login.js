@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import imgLogin from '../Assets/images.jfif'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import imgLogin from '../Assets/loginImg.png';
 
 const Login = () => {
     const [formState, setFormState] = useState({})
@@ -43,15 +44,15 @@ const Login = () => {
                     <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
                         <img
                             src={imgLogin}
-                            class="w-full h-[500px]"
+                            className="w-full h-[500px]"
                             alt="Sample image"
                         />
                     </div>
                     <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                         <form onSubmit={doLogin}>
                             <div className="flex items-center justify-center lg:justify-center pb-4">
-                                <p class="text-lg font-serif mb-0 mr-4">
-                                    Sign in{' '}
+                                <p className="text-lg font-serif mb-0 mr-4">
+                                    Sign in
                                 </p>
                             </div>
                             <div>
@@ -85,9 +86,17 @@ const Login = () => {
                                     type="submit"
                                     className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                 >
-                                    {' '}
-                                    submit{' '}
+                                    SIGN IN
                                 </button>
+                                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+                                    Don't have an account?
+                                    <Link
+                                        to="/sign-up"
+                                        className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                                    >
+                                        Register
+                                    </Link>
+                                </p>
                             </div>
                         </form>
                     </div>

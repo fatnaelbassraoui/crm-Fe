@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { postFormDataFromDataBase } from '../States/calenderFormSlice'
 import moment from 'moment'
 import { getAllEventsFromDataBase } from '../States/eventSlice'
@@ -11,15 +10,14 @@ const CalenderForm = ({ closeModal }) => {
     const [appointmentData, setAppointmentData] = useState({})
     //console.log(appointmentData);
 
-    // const postEventToDb = useSelector(postFormDataFromDataBase);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() //In react-redux the useDispatch hook gives us access to our store's dispatch method. Dispatch is used to send actions into our redux store and is the only way we can affect(influenzare) the store from within a component.
 
     const handleAddEvent = () => {
         dispatch(
             postFormDataFromDataBase({
                 title: appointmentData.title,
-                start: moment(appointmentData.start).toDate(),
-                end: moment(appointmentData.end).toDate(),
+                start: moment(appointmentData.start).add(1, 'hour').toDate(),
+                end: moment(appointmentData.end).add(1, 'hour').toDate(),
                 description: appointmentData.description,
             })
         )
@@ -30,7 +28,7 @@ const CalenderForm = ({ closeModal }) => {
     // console.log(eventFromDb);
 
     return (
-        <div className="w-[300px] h-[350px]  bg-blue-100 fixed top-1/2 left-1/2 flex flex-col item-center transform -translate-y-1/2 -translate-x-1/2 backdrop-blur-lg z-40 ">
+        <div className="w-[350px] h-[350px]  bg-blue-100 fixed top-1/2 left-1/2 flex flex-col item-center transform -translate-y-1/2 -translate-x-1/2 backdrop-blur-lg z-40 ">
             <div className="flex justify-end">
                 <button
                     onClick={() => closeModal(false)}
@@ -51,7 +49,7 @@ const CalenderForm = ({ closeModal }) => {
                                     title: e.target.value,
                                 })
                             }}
-                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-serif text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         />
                     </div>
                     <div>
@@ -67,7 +65,7 @@ const CalenderForm = ({ closeModal }) => {
                                     start,
                                 })
                             }}
-                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-serif text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         />
                     </div>
                     <div>
@@ -83,7 +81,7 @@ const CalenderForm = ({ closeModal }) => {
                                     end,
                                 })
                             }}
-                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-serif text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         />
                     </div>
                     <div>
@@ -96,7 +94,7 @@ const CalenderForm = ({ closeModal }) => {
                                     description: e.target.value,
                                 })
                             }
-                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-serif text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            className="form-control block w-full px-4 py-2 mb-4  text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         />
                     </div>
                     <div>

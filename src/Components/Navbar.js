@@ -16,7 +16,7 @@ const Navbar = () => {
                     </p>
                 </div>
                 <div className="pl-2 pt-3 text-white font-serif">
-                    <LogOut/>
+                    <LogOut />
                 </div>
             </div>
         </nav>

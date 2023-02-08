@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import Calender from '../Components.js/Calender'
-import Navbar from '../Components.js/Navbar'
-import Footer from '../Components.js/Footer'
-import CalenderForm from '../Components.js/CalenderForm'
+import Calender from '../Components/Calender'
+import Navbar from '../Components/Navbar'
+import Footer from '../Components/Footer'
+import CalenderForm from '../Components/CalenderForm'
 
 const Home = () => {
     const [addNewEvent, setAddNewEvent] = useState(false)
     return (
         <>
             <Navbar />
-            <div className='grid justify-end'>
+            <div className="grid justify-end">
                 <button
                     onClick={() => {
                         setAddNewEvent(true)

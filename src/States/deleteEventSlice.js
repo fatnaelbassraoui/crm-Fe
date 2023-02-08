@@ -42,7 +42,6 @@ const deleteEventSlice = createSlice({
 })
 
 export const isDeleteEventLoading = (state) => state.deleteEvent.isLoading
-export const isDeleteEventResponse = (state) =>
-    state.deleteEvent.deleteEventResponse
+export const isDeleteEventResponse = (state) => state.deleteEvent.deleteEventResponse
 export const isDeleteEventError = (state) => state.deleteEvent.error
 export default deleteEventSlice.reducer

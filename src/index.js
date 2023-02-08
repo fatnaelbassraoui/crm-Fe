@@ -7,11 +7,17 @@ import { Provider } from 'react-redux'
 import eventReducer from './States/eventSlice'
 import formDataReducer from './States/calenderFormSlice'
 import deleteEventReducer from './States/deleteEventSlice'
+import editEventSliceReducer from './States/editEventSlice'
+import addNewUserReducer from './States/AddNewUserSlice'
+
 
 const reducer = combineReducers({
     customerEvents: eventReducer,
     formDataEvent: formDataReducer,
     deleteEvent: deleteEventReducer,
+    editEvent: editEventSliceReducer,
+    users: addNewUserReducer
+
 })
 
 const store = configureStore({
