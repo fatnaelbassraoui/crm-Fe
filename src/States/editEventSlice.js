@@ -12,7 +12,8 @@ export const editEvent = createAsyncThunk(
 
     async ({ data, id }, { dispatch, rejectWithValue }) => {
         try {
-            const editResponse = await fetch(`${process.env.REACT_APP_BASEURL}/event/${id}`,
+            const editResponse = await fetch(
+                `${process.env.REACT_APP_BASEURL}/event/${id}`,
                 {
                     method: 'PATCH',
                     headers: {

@@ -8,7 +8,10 @@ import eventReducer from './States/eventSlice'
 import formDataReducer from './States/calenderFormSlice'
 import deleteEventReducer from './States/deleteEventSlice'
 import editEventSliceReducer from './States/editEventSlice'
-import addNewUserReducer from './States/AddNewUserSlice'
+import addNewUserReducer from './States/addNewUserSlice'
+import getCustomersReducer from './States/getCustomersInfoSlice'
+import deleteCustomerReducer from './States/deleteCustomerSlice'
+
 
 
 const reducer = combineReducers({
@@ -16,8 +19,9 @@ const reducer = combineReducers({
     formDataEvent: formDataReducer,
     deleteEvent: deleteEventReducer,
     editEvent: editEventSliceReducer,
-    users: addNewUserReducer
-
+    users: addNewUserReducer,
+    customers: getCustomersReducer,
+    deleteCustomer: deleteCustomerReducer
 })
 
 const store = configureStore({

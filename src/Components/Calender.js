@@ -11,7 +11,7 @@ import { deleteEvent } from '../States/deleteEventSlice'
 require('moment/locale/it')
 
 const localizer = momentLocalizer(moment)
-const session = JSON.parse(sessionStorage.getItem('Authorization'))
+
 
 const Calender = () => {
     const [selectedEvent, setSelectedEvent] = useState(null)
@@ -24,13 +24,6 @@ const Calender = () => {
     }
 
     const eventFromDb = useSelector(arrayOfEvents)
-    
-    const filteredEvents = () => {
-        return eventFromDb.filter(
-            (event) => event.assistedByDoctor[0]?.doctorId === session.user
-        )
-    }
-
 
     const dispatch = useDispatch()
 
@@ -45,6 +38,7 @@ const Calender = () => {
             end: moment(e.end).toDate(),
         })
     }
+
     useEffect(() => {
         dispatch(getAllEventsFromDataBase())
         // console.log(process.env.REACT_APP_BASEURL);

@@ -1,7 +1,5 @@
-export const signUpLink = [
-   { id: 'sign-up',
+export const signUpLink = {
+    id: 'sign-up',
     title: 'signUp',
-    link:'/sign-up'
+    link: '/sign-up',
 }
-
-]

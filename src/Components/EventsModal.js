@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 import { FaPen } from 'react-icons/fa'
+import AlertConfirmDeleteEvent from './AlertConfirmDeleteEvent'
 import EditEventForm from './EditEventForm'
 
 const EventsModal = ({ modalState, selectedEvent, deleteEvent }) => {
     // console.log(selectedEvent);
     const [editModalState, setEditModalState] = useState(false)
+    const [showAlert, setShoWAlert] = useState(false)
     return (
         <div className=" w-[300px] h-[400px] fixed top-1/2 left-1/2 flex item-center transform -translate-y-1/2 -translate-x-1/2  z-30 ">
             <div className="modal-dialog relative w-auto pointer-events-none">
@@ -46,7 +48,8 @@ const EventsModal = ({ modalState, selectedEvent, deleteEvent }) => {
                             Close
                         </button>
                         <button
-                            onClick={() => deleteEvent(selectedEvent._id)}
+                            // onClick={() => deleteEvent(selectedEvent._id)}
+                            onClick={() => setShoWAlert(true)}
                             className="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition  duration-150 ease-in-out"
                         >
                             Delete
@@ -54,6 +57,7 @@ const EventsModal = ({ modalState, selectedEvent, deleteEvent }) => {
                     </div>
                 </div>
             </div>
+            {showAlert && <AlertConfirmDeleteEvent eventInfo={selectedEvent} deleteEvent={deleteEvent} alertState={setShoWAlert} />}
         </div>
     )
 }

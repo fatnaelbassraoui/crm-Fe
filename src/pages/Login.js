@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import imgLogin from '../Assets/loginImg.png';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import imgLogin from '../Assets/loginImg.png'
 
 const Login = () => {
     const [formState, setFormState] = useState({})
@@ -45,7 +45,7 @@ const Login = () => {
                         <img
                             src={imgLogin}
                             className="w-full h-[500px]"
-                            alt="Sample image"
+                            alt="imageLogin"
                         />
                     </div>
                     <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">

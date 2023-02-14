@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 
 const initialState = {
@@ -25,9 +25,12 @@ export const addNewUserToDB = createAsyncThunk(
             })
             .catch((error) => {
                 if (error) {
-                    toast.error('An error has occurred, please check the data insert', {
-                        position: toast.POSITION.center_RIGHT,
-                    })
+                    toast.error(
+                        'An error has occurred, please check the data insert',
+                        {
+                            position: toast.POSITION.center_RIGHT,
+                        }
+                    )
                     rejectWithValue(error)
                 }
             })
@@ -55,6 +58,7 @@ const addNewUserSlice = createSlice({
 })
 
 export const registrationSuccess = (state) => state.users.signUp
-export const registrationResponse = (state) => state.users.registeredUserResponse
+export const registrationResponse = (state) =>
+    state.users.registeredUserResponse
 export const registrationError = (state) => state.users.error
 export default addNewUserSlice.reducer

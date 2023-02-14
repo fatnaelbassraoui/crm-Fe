@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Logo from '../Assets/Logo.jpg'
 import LogOut from './LogOut'
 const Navbar = () => {
@@ -15,6 +16,11 @@ const Navbar = () => {
                         Clinic Dental Dott. Faty Elba
                     </p>
                 </div>
+                <Link to="/customer-info">
+                    <div className="pl-2 pt-3 text-white font-serif">
+                        customer Info
+                    </div>
+                </Link>
                 <div className="pl-2 pt-3 text-white font-serif">
                     <LogOut />
                 </div>

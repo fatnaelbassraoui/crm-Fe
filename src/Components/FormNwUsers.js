@@ -3,24 +3,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addNewUsersToDB } from '../States/NewUser'
 import { useNavigate } from 'react-router-dom'
 
-
 const FormNwUsers = () => {
     const [formValue, setFormValue] = useState({})
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const userData = {  // creato un'ogetto per il passaggio dei dati del form
+    const userData = {
+        // creato un'ogetto per il passaggio dei dati del form
         data: {
             firstName: formValue.firstName,
             lastName: formValue.lastName,
             role: formValue.role,
             password: formValue.password,
             userName: formValue.userName,
-            email: formValue.email
-        }
+            email: formValue.email,
+        },
     }
-    console.log(userData);
+    console.log(userData)
     const handleFormAddNeUser = (e) => {
         e.preventDefault()
         dispatch(addNewUsersToDB(userData))
@@ -74,7 +74,9 @@ const FormNwUsers = () => {
                                 })
                             }
                         >
-                            <option disabled defaultValue>Please choose your role</option>
+                            <option disabled defaultValue>
+                                Please choose your role
+                            </option>
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
@@ -125,7 +127,6 @@ const FormNwUsers = () => {
                         >
                             Create Account
                         </button>
-
                     </div>
                 </form>
             </div>

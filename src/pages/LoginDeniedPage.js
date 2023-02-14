@@ -20,7 +20,6 @@ const LoginDeniedPage = () => {
                 </h2>
             </div>
         </div>
-
     )
 }
 
