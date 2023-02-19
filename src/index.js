@@ -11,7 +11,8 @@ import editEventSliceReducer from './States/editEventSlice'
 import addNewUserReducer from './States/addNewUserSlice'
 import getCustomersReducer from './States/getCustomersInfoSlice'
 import deleteCustomerReducer from './States/deleteCustomerSlice'
-
+import editCustomerReducer from './States/editCustomerInfoSlice'
+import addCustomerReducer from './States/addNewCustomerSlice'
 
 
 const reducer = combineReducers({
@@ -21,7 +22,9 @@ const reducer = combineReducers({
     editEvent: editEventSliceReducer,
     users: addNewUserReducer,
     customers: getCustomersReducer,
-    deleteCustomer: deleteCustomerReducer
+    deleteCustomer: deleteCustomerReducer,
+    editCustomer: editCustomerReducer,
+    addCustomer: addCustomerReducer
 })
 
 const store = configureStore({

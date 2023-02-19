@@ -3,7 +3,7 @@ import React from 'react'
 
 const CustomersInfoModal = ({ closeModal, customersInfo }) => {
     return (
-        console.log(customersInfo),
+        // console.log(customersInfo),
 
         <>
             <div

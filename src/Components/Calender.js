@@ -32,18 +32,11 @@ const Calender = () => {
         setModalState(false)
     }
 
-    const mapToRBCFormat = (e) => {
-        Object.assign({}, e, {
-            start: moment(e.start).toDate(),
-            end: moment(e.end).toDate(),
-        })
-    }
 
     useEffect(() => {
         dispatch(getAllEventsFromDataBase())
-        // console.log(process.env.REACT_APP_BASEURL);
     }, [dispatch])
-    //  console.log(eventFromDb);
+
 
     return (
         <div className="App h-screen p-4 ">

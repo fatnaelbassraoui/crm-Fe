@@ -27,21 +27,6 @@ export const editEvent = createAsyncThunk(
             return rejectWithValue(error.response.data)
         }
     }
-    // async({data,id},{ dispatch, rejectWithValue }) =>{
-    //         return await axios
-    //         .patch(`${process.env.REACT_APP_BASEURL}/event/${id}`,data,{
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //         })
-    //         .then((res)=>{
-    //             dispatch(getAllEventsFromDataBase())
-    //             return res.data
-    //         })
-    //     .catch ((error) => {
-    //         return rejectWithValue(error.response.data)
-    //     })
-    // }
 )
 
 const editEventSlice = createSlice({

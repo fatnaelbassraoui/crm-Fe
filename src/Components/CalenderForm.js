@@ -6,6 +6,7 @@ import { postFormDataFromDataBase } from '../States/calenderFormSlice'
 import moment from 'moment'
 import { getAllEventsFromDataBase } from '../States/eventSlice'
 
+
 const CalenderForm = ({ closeModal }) => {
     const [appointmentData, setAppointmentData] = useState({})
     //console.log(appointmentData);

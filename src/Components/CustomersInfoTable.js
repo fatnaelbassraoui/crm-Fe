@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { TfiEye } from 'react-icons/tfi'
+import { FaRegEdit } from 'react-icons/fa'
+import { FaTrashAlt } from 'react-icons/fa';
 import {
     getCustomersInfoFromDB,
     getCustomersError,
@@ -13,19 +12,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import CustomersInfoModal from './CustomersInfoModal'
 import { deleteCustomer } from '../States/deleteCustomerSlice'
 import AlertConfirmDeleteCustomer from './AlertConfirmDeleteCustomer'
+import EditCustomerInfoModal from './EditCustomerInfoModal';
+import AddNewCustomersModal from './AddNewCustomersModal';
 
-const session = JSON.parse(sessionStorage.getItem('Authorization'))
-const idDoctor = session.user
-console.log(idDoctor)
 
 
 const CustomersInfoTable = () => {
     const [ShowModal, setShowModal] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
+    const [showModalEditCustomer, setShowModalEditCustomer] = useState(false)
+    const [showAddCustomerModal, setShowAddCustomerModal] = useState(false)
+    const [sessionStorageState, setSessionStorageState] = useState(JSON.parse(sessionStorage.getItem('Authorization')))
+    // console.log(sessionStorageState);
+    const idDoctor = sessionStorageState?.user
+    // console.log(idDoctor)
 
 
     const customers = useSelector(getCustomersSuccess)
-    console.log(customers)
+    // console.log(customers)
     const isLoading = useSelector(getCustomersIsLoading)
     const error = useSelector(getCustomersError)
     const dispatch = useDispatch()
@@ -34,6 +38,13 @@ const CustomersInfoTable = () => {
         dispatch(deleteCustomer(id))
 
     }
+
+
+    useEffect(() => {
+        setSessionStorageState(JSON.parse(sessionStorage.getItem('Authorization')))
+
+    }, [])
+
 
     useEffect(() => {
         //useEffect viene eseguito dopo il rendering del componente
@@ -47,12 +58,20 @@ const CustomersInfoTable = () => {
             <div className="flex flex-col">
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                        {showAddCustomerModal && <AddNewCustomersModal closeModal={setShowAddCustomerModal} />}
                         <div className="overflow-hidden">
                             <table className="min-w-full">
                                 <thead className="border-b bg-blue-100 border-blue-200 ">
                                     <tr>
-                                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
-
+                                        <th scope="col" className=" text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                                            <button
+                                                onClick={() => {
+                                                    setShowAddCustomerModal(true)
+                                                }}
+                                                className=" w-[40px] h-[40px] rounded-full bg-green-500   shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out  text-white font-medium text-2xl leading-snug "
+                                            >
+                                                +
+                                            </button>
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
                                             First Name
@@ -75,19 +94,18 @@ const CustomersInfoTable = () => {
                                     </tr>
                                 </thead>
 
-                                {customers &&
+                                {sessionStorageState && customers &&
                                     customers
                                         ?.filter((patient) => {
                                             return patient.assistedByDoctor?.some((doctor) => {
                                                 return doctor.doctorId === idDoctor
                                             })
-                                        })
-                                        .map((customer, index) => {
+                                        }).map((customer, index) => {
                                             // console.log(customer.patientFirstName)
                                             return (
                                                 <tbody key={index}>
                                                     <tr className="bg-white-100 border-b">
-                                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        <td className="flex justify-center text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                             <img
                                                                 src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
                                                                 className="rounded-full w-10"
@@ -112,30 +130,33 @@ const CustomersInfoTable = () => {
                                                         >
                                                             <button
                                                                 onClick={() => setShowModal(true)}
+                                                                className='bg-green-400 rounded-full w-8 h-8 pl-2'
                                                             >
-                                                                <FontAwesomeIcon icon={faEye} />
-
+                                                                <TfiEye />
                                                             </button>
 
                                                         </td>
                                                         <td
-                                                            className='text-center'>
+                                                            className='text-center item-center'>
                                                             <button
-                                                                className='p-4'
-                                                                // onClick={() => handleDeleteCustomer(customer._id)}
+                                                                className='bg-red-400 rounded-full w-8 h-8 mr-4 pl-2'
                                                                 onClick={() => setShowAlert(true)}
                                                             >
-                                                                <FontAwesomeIcon icon={faTrash} />
+                                                                <FaTrashAlt />
+
+
                                                             </button>
                                                             <button
-                                                                className='p-4'
+                                                                onClick={() => setShowModalEditCustomer(true)}
+                                                                className='bg-blue-200 rounded-full w-8 h-8 ml-2 pl-2'
                                                             >
-                                                                <FontAwesomeIcon icon={faPen} />
+                                                                <FaRegEdit />
                                                             </button>
                                                         </td>
                                                     </tr>
                                                     {ShowModal && <CustomersInfoModal closeModal={setShowModal} customersInfo={customer} />}
                                                     {showAlert && <AlertConfirmDeleteCustomer closeAlert={setShowAlert} alertCustomerInfo={customer} deleteCustomer={handleDeleteCustomer} />}
+                                                    {showModalEditCustomer && <EditCustomerInfoModal closeModalEdit={setShowModalEditCustomer} customersInfo={customer} />}
                                                 </tbody>
 
 
