@@ -18,7 +18,7 @@ export const addNewUserToDB = createAsyncThunk(
             .post(`${process.env.REACT_APP_BASEURL}/addNewUsers`, data)
             .then((res) => {
                 toast.success('User registered successfully', {
-                    position: toast.POSITION.center_RIGHT,
+                    position: toast.POSITION.TOP_RIGHT,
                 })
 
                 return res.data
@@ -28,7 +28,7 @@ export const addNewUserToDB = createAsyncThunk(
                     toast.error(
                         'An error has occurred, please check the data insert',
                         {
-                            position: toast.POSITION.center_RIGHT,
+                            position: toast.POSITION.TOP_RIGHT,
                         }
                     )
                     rejectWithValue(error)

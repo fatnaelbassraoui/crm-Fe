@@ -8,18 +8,25 @@ import { getCustomersInfoFromDB } from '../States/getCustomersInfoSlice'
 const AddNewCustomersModal = ({ closeModal }) => {
     const [newCustomer, setNewCustomer] = useState({})
     // console.log(newCustomer)
+    const [doctors, setDoctors] = useState([])
 
-    const getDoctors = axios
-        .get(`${process.env.REACT_APP_BASEURL}/newUsers`)
-        .then((response) => {
-            console.log(response)
-            return response.data
+    const getDoctors = async () => {
+        return await axios
+            .get(`${process.env.REACT_APP_BASEURL}/newUsers`)
+            .then((response) => {
+                console.log(response)
+                return response.data
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        getDoctors().then((data) => {
+            setDoctors(data)
         })
-        .catch((error) => {
-            console.log(error)
-        })
-
-
+    }, [])
 
     const dispatch = useDispatch()
 
@@ -159,14 +166,14 @@ const AddNewCustomersModal = ({ closeModal }) => {
                                             className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         >
                                             <option value="">Shoes a Doctor</option>
-                                            {getDoctors && getDoctors?.map((doctor, index) => {
+                                            {doctors && doctors?.map((doctor, index) => {
                                                 console.log(doctor);
                                                 return (
                                                     <option
                                                         key={doctor._id}
-                                                        value={doctor._id}
+                                                    // value={doctor._id}
                                                     >
-                                                        {doctor.firstName}-
+                                                        {doctor.firstName}
                                                     </option>
                                                 )
                                             })}
