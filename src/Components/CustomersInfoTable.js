@@ -15,7 +15,6 @@ import AlertConfirmDeleteCustomer from './AlertConfirmDeleteCustomer'
 import EditCustomerInfoModal from './EditCustomerInfoModal';
 import AddNewCustomersModal from './AddNewCustomersModal';
 import doctorIcon from '../Assets/doctorIcon.png'
-import axios from 'axios';
 import AssignDoctorModal from './AssignDoctorModal';
 
 
@@ -27,7 +26,10 @@ const CustomersInfoTable = () => {
     const [showModalEditCustomer, setShowModalEditCustomer] = useState(false)
     const [showAddCustomerModal, setShowAddCustomerModal] = useState(false)
     const [sessionStorageState, setSessionStorageState] = useState(JSON.parse(sessionStorage.getItem('Authorization')))
+
     const idDoctor = sessionStorageState?.user
+    const admin = sessionStorageState?.role
+    console.log(admin);
     const [customerInfo, setCustomerInfo] = useState({})
     const [customerInfoEdit, setCustomerInfoEdit] = useState({})
     const [customerInfoDelete, setCustomerInfoDelete] = useState({})
@@ -84,7 +86,7 @@ const CustomersInfoTable = () => {
             <div className="flex flex-col">
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                        {showAddCustomerModal && <AddNewCustomersModal closeModal={setShowAddCustomerModal} />}
+                        {showAddCustomerModal && admin === 'admin' && <AddNewCustomersModal closeModal={setShowAddCustomerModal} />}
                         <div className="overflow-hidden">
                             <table className="min-w-full">
                                 <thead className="border-b bg-blue-100 border-blue-200 ">
@@ -203,9 +205,9 @@ const CustomersInfoTable = () => {
                                                         </td>
                                                     </tr>
                                                     {ShowModal && <CustomersInfoModal closeModal={setShowModal} customersInfo={customerInfo} />}
-                                                    {showAlert && <AlertConfirmDeleteCustomer closeAlert={setShowAlert} alertCustomerInfo={customerInfoDelete} deleteCustomerInfo={handleDeleteCustomer} />}
-                                                    {showModalEditCustomer && <EditCustomerInfoModal closeModalEdit={setShowModalEditCustomer} customersInformation={customerInfoEdit} />}
-                                                    {showModalAssignDoctor && <AssignDoctorModal closeModalAssignDoctor={setShowModalAssignDoctor} customersInformation={customerInfo} />}
+                                                    {showAlert && admin === 'admin' && <AlertConfirmDeleteCustomer closeAlert={setShowAlert} alertCustomerInfo={customerInfoDelete} deleteCustomerInfo={handleDeleteCustomer} />}
+                                                    {showModalEditCustomer && admin === 'admin' && <EditCustomerInfoModal closeModalEdit={setShowModalEditCustomer} customersInformation={customerInfoEdit} />}
+                                                    {showModalAssignDoctor && admin === 'admin' && <AssignDoctorModal closeModalAssignDoctor={setShowModalAssignDoctor} customersInformation={customerInfo} />}
                                                 </tbody>
                                             )
                                         })}

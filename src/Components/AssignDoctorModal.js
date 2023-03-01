@@ -5,12 +5,9 @@ import axios from 'axios'
 
 
 const AssignDoctorModal = ({ closeModalAssignDoctor, customersInformation }) => {
-    console.log(customersInformation);
-
     const [selectedDoctor, setSelectedDoctor] = useState(null)
-    console.log(selectedDoctor)
     const [doctors, setDoctors] = useState(null)
-    //console.log(doctors);
+
 
     const getDoctors = async () => {
         return await axios
