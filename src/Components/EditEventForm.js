@@ -34,7 +34,7 @@ const EditEventForm = ({ events, close }) => {
 
     return (
         <div
-            className="w-[350px]  bg-blue-100 fixed top-1/2 left-1/2 flex flex-col item-center transform -translate-y-1/2 -translate-x-1/2 backdrop-blur-lg z-40 "
+            className="w-[350px] p-4 bg-blue-100 fixed top-1/2 left-1/2 flex flex-col item-center transform -translate-y-1/2 -translate-x-1/2 backdrop-blur-lg z-40 "
         >
             <div className="flex justify-end">
                 <button
@@ -70,11 +70,11 @@ const EditEventForm = ({ events, close }) => {
                         Date of Start
                     </label>
                     <DatePicker
-                        showTimeSelect
+                        showTimeSelect // mostra il timepicker per selezionare l'ora di inizio e di fine evento     
                         dateFormat="dd/MM/yyyy,HH:mm a"
                         timeCaption="time"
                         placeholderText="Date of start"
-                        selected={editAppointmentData.start}
+                        selected={editAppointmentData.start} // selected setta il valore di default del datepicker con il valore dell'evento selezionato    
                         onChange={(start) => {
                             setEditAppointmentData({
                                 ...editAppointmentData,

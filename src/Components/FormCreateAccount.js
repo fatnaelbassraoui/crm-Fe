@@ -16,7 +16,6 @@ const FormCreateAccount = () => {
         data: {
             firstName: formValue.firstName,
             lastName: formValue.lastName,
-            role: formValue.role,
             password: formValue.password,
             userName: formValue.userName,
             email: formValue.email,
@@ -64,24 +63,6 @@ const FormCreateAccount = () => {
                         }
                     />
                 </div>
-                <div className="mb-3">
-                    <select
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        onChange={(e) =>
-                            setFormValue({
-                                ...formValue,
-                                role: e.target.value,
-                            })
-                        }
-                    >
-                        <option disabled defaultValue>
-                            Please choose your role
-                        </option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
-                </div>
-
                 <div className="mb-3">
                     <input
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

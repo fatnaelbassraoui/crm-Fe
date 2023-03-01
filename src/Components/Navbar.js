@@ -40,7 +40,9 @@ const Navbar = () => {
                         </p>
                     </div>
                 </Link>
-                <div className="flex items-center pl-2 pb-4 text-white font-serif">
+                <div
+                    className="flex items-center pl-2 pb-4 text-white font-serif"
+                >
                     <LogOut />
                 </div>
             </div>

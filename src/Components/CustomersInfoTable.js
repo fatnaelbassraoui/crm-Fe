@@ -14,6 +14,10 @@ import { deleteCustomer } from '../States/deleteCustomerSlice'
 import AlertConfirmDeleteCustomer from './AlertConfirmDeleteCustomer'
 import EditCustomerInfoModal from './EditCustomerInfoModal';
 import AddNewCustomersModal from './AddNewCustomersModal';
+import doctorIcon from '../Assets/doctorIcon.png'
+import axios from 'axios';
+import AssignDoctorModal from './AssignDoctorModal';
+
 
 
 
@@ -23,21 +27,43 @@ const CustomersInfoTable = () => {
     const [showModalEditCustomer, setShowModalEditCustomer] = useState(false)
     const [showAddCustomerModal, setShowAddCustomerModal] = useState(false)
     const [sessionStorageState, setSessionStorageState] = useState(JSON.parse(sessionStorage.getItem('Authorization')))
-    // console.log(sessionStorageState);
     const idDoctor = sessionStorageState?.user
-    // console.log(idDoctor)
+    const [customerInfo, setCustomerInfo] = useState({})
+    const [customerInfoEdit, setCustomerInfoEdit] = useState({})
+    const [customerInfoDelete, setCustomerInfoDelete] = useState({})
+    const [showModalAssignDoctor, setShowModalAssignDoctor] = useState(false)
 
 
-    const customers = useSelector(getCustomersSuccess)
-    // console.log(customers)
-    const isLoading = useSelector(getCustomersIsLoading)
-    const error = useSelector(getCustomersError)
+
     const dispatch = useDispatch()
 
-    const handleDeleteCustomer = (id) => {
-        dispatch(deleteCustomer(id))
+
+
+
+    const handleShowModal = (data) => {
+        setCustomerInfo(data)
+        setShowModal(true)
+    }
+
+    const handleShowModalEditCustomer = (data) => {
+        setCustomerInfoEdit(data)
+        setShowModalEditCustomer(true)
+    }
+
+    const handleDeleteCustomer = (data, id) => {
+        setCustomerInfoDelete(data)
+        dispatch(deleteCustomer(data, id))
+        setShowAlert(true)
+    }
+    const handleAssignDoctor = (data) => {
+        setShowModalAssignDoctor(true)
+        setCustomerInfo(data)
 
     }
+
+    const customers = useSelector(getCustomersSuccess)
+    const isLoading = useSelector(getCustomersIsLoading)
+    const error = useSelector(getCustomersError)
 
 
     useEffect(() => {
@@ -91,23 +117,29 @@ const CustomersInfoTable = () => {
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
                                             Actions
                                         </th>
+                                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                                            Assign doctor
+                                        </th>
                                     </tr>
                                 </thead>
 
                                 {sessionStorageState && customers &&
                                     customers
                                         ?.filter((patient) => {
-                                            return patient.assistedByDoctor?.some((doctor) => {
-                                                return doctor.doctorId === idDoctor
-                                            })
+                                            if (sessionStorageState.role !== 'admin') {
+                                                return patient.assistedByDoctor?.some((doctor) => {
+                                                    return doctor.doctorId === idDoctor
+                                                })
+                                            } else {
+                                                return true
+                                            }
                                         }).map((customer, index) => {
-                                            // console.log(customer.patientFirstName)
                                             return (
                                                 <tbody key={index}>
                                                     <tr className="bg-white-100 border-b">
                                                         <td className="flex justify-center text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                             <img
-                                                                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                                                src={customer.patientAvatar}
                                                                 className="rounded-full w-10"
                                                                 alt="Avatar"
                                                             />
@@ -129,7 +161,7 @@ const CustomersInfoTable = () => {
                                                             className='text-center'
                                                         >
                                                             <button
-                                                                onClick={() => setShowModal(true)}
+                                                                onClick={() => handleShowModal(customer)}
                                                                 className='bg-green-400 rounded-full w-8 h-8 pl-2'
                                                             >
                                                                 <TfiEye />
@@ -137,29 +169,44 @@ const CustomersInfoTable = () => {
 
                                                         </td>
                                                         <td
-                                                            className='text-center item-center'>
+                                                            className='text-center item-center m-auto'>
                                                             <button
+                                                                onClick={() => handleDeleteCustomer(customer, customer._id)}
                                                                 className='bg-red-400 rounded-full w-8 h-8 mr-4 pl-2'
-                                                                onClick={() => setShowAlert(true)}
+
                                                             >
                                                                 <FaTrashAlt />
 
 
                                                             </button>
                                                             <button
-                                                                onClick={() => setShowModalEditCustomer(true)}
+                                                                onClick={() => handleShowModalEditCustomer(customer)}
                                                                 className='bg-blue-200 rounded-full w-8 h-8 ml-2 pl-2'
                                                             >
                                                                 <FaRegEdit />
                                                             </button>
                                                         </td>
+                                                        <td
+                                                            className='text-center'
+                                                        >
+                                                            <button
+                                                                onClick={() => handleAssignDoctor(customer)}
+                                                                className='bg-blue-400 rounded-full w-7 h-8'
+                                                            >
+                                                                <img
+                                                                    src={doctorIcon}
+                                                                    className="rounded-full w-7"
+                                                                    alt="Avatar"
+                                                                />
+                                                            </button>
+
+                                                        </td>
                                                     </tr>
-                                                    {ShowModal && <CustomersInfoModal closeModal={setShowModal} customersInfo={customer} />}
-                                                    {showAlert && <AlertConfirmDeleteCustomer closeAlert={setShowAlert} alertCustomerInfo={customer} deleteCustomer={handleDeleteCustomer} />}
-                                                    {showModalEditCustomer && <EditCustomerInfoModal closeModalEdit={setShowModalEditCustomer} customersInfo={customer} />}
+                                                    {ShowModal && <CustomersInfoModal closeModal={setShowModal} customersInfo={customerInfo} />}
+                                                    {showAlert && <AlertConfirmDeleteCustomer closeAlert={setShowAlert} alertCustomerInfo={customerInfoDelete} deleteCustomerInfo={handleDeleteCustomer} />}
+                                                    {showModalEditCustomer && <EditCustomerInfoModal closeModalEdit={setShowModalEditCustomer} customersInformation={customerInfoEdit} />}
+                                                    {showModalAssignDoctor && <AssignDoctorModal closeModalAssignDoctor={setShowModalAssignDoctor} customersInformation={customerInfo} />}
                                                 </tbody>
-
-
                                             )
                                         })}
                             </table>

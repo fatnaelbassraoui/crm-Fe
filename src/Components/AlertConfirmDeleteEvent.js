@@ -1,6 +1,7 @@
 import React from 'react'
 
 const AlertConfirmDeleteEvent = ({ eventInfo, deleteEvent, alertState }) => {
+
     return (
         <>
             <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -26,7 +27,7 @@ const AlertConfirmDeleteEvent = ({ eventInfo, deleteEvent, alertState }) => {
                                     Delete account ?
                                 </h4>
                                 <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
-                                    Would you like to delete this customer information?
+                                    {` Would you like to delete ${eventInfo.title} event information? `}
                                 </p>
                                 <div className="items-center gap-2 mt-3 sm:flex">
                                     <button

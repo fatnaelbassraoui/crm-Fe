@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import imgLogin from '../Assets/loginImg.png'
+import imgLogin from '../Assets/loginImg.jpg'
 
 const Login = () => {
     const [formState, setFormState] = useState({})

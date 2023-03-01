@@ -7,26 +7,7 @@ import { getCustomersInfoFromDB } from '../States/getCustomersInfoSlice'
 
 const AddNewCustomersModal = ({ closeModal }) => {
     const [newCustomer, setNewCustomer] = useState({})
-    // console.log(newCustomer)
-    const [doctors, setDoctors] = useState([])
-
-    const getDoctors = async () => {
-        return await axios
-            .get(`${process.env.REACT_APP_BASEURL}/newUsers`)
-            .then((response) => {
-                console.log(response)
-                return response.data
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
-
-    useEffect(() => {
-        getDoctors().then((data) => {
-            setDoctors(data)
-        })
-    }, [])
+    console.log(newCustomer)
 
     const dispatch = useDispatch()
 
@@ -42,9 +23,9 @@ const AddNewCustomersModal = ({ closeModal }) => {
                 patientPhoneNumber: newCustomer.patientPhoneNumber,
                 patientAddress: newCustomer.patientAddress,
                 patientEmail: newCustomer.patientEmail,
-                patientTreatments: newCustomer.patientTreatments,
-                assistedByDoctor: newCustomer.assistedByDoctor
+                patientTreatments: newCustomer.patientTreatments
             }
+
         }
         dispatch(addNewCustomerToDB(newCustomerToUpload))
 
@@ -65,7 +46,7 @@ const AddNewCustomersModal = ({ closeModal }) => {
                         <div className="md:flex items-center">
                             <div className="relative p-6 rounded-lg shadow-lg bg-white ">
                                 <form
-                                    className='w-[350px]'
+                                    className='w-[300px]'
                                     onSubmit={handleAddNewCustomer}
                                 >
                                     <div
@@ -161,24 +142,7 @@ const AddNewCustomersModal = ({ closeModal }) => {
                                             }}
                                         />
                                     </div>
-                                    <div>
-                                        <select
-                                            className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        >
-                                            <option value="">Shoes a Doctor</option>
-                                            {doctors && doctors?.map((doctor, index) => {
-                                                console.log(doctor);
-                                                return (
-                                                    <option
-                                                        key={doctor._id}
-                                                    // value={doctor._id}
-                                                    >
-                                                        {doctor.firstName}
-                                                    </option>
-                                                )
-                                            })}
-                                        </select>
-                                    </div>
+
                                     <div className="form-group mb-6 grid grid-flow-col">
                                         <div
                                             className='flex justify-between'
@@ -186,12 +150,13 @@ const AddNewCustomersModal = ({ closeModal }) => {
                                             <button
                                                 type="submit"
                                                 onClick={() => closeModal(false)}
-                                                className=" w-20 px-6 py-2.5 bg-pink-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-700  active:shadow-lg transition duration-150 ease-in-out">
+                                                className=" w-20 px-6 py-2.5 ml-11 mx-2 bg-pink-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-700  active:shadow-lg transition duration-150 ease-in-out">
                                                 close
                                             </button>
                                         </div>
                                         <div>
                                             <button
+
                                                 type="submit"
                                                 className="w-25 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                                                 Save

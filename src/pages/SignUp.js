@@ -1,6 +1,6 @@
 import React from 'react'
 import FormCreateAccount from '../Components/FormCreateAccount'
-import imagesSignUp from '../Assets/imagesSignUp..jpg'
+import imagesSignUp from '../Assets/imagesSignUp.jpg'
 
 export const SignUp = () => {
     return (

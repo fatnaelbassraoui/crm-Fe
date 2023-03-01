@@ -1,6 +1,10 @@
 import React from 'react'
 
-const AlertConfirmDeleteCustomer = ({ closeAlert, alertCustomerInfo, deleteCustomer }) => {
+const AlertConfirmDeleteCustomer = ({ closeAlert, alertCustomerInfo, deleteCustomerInfo }) => {
+    const handleDelete = () => {
+        deleteCustomerInfo(alertCustomerInfo._id)
+        closeAlert(false)
+    }
     return (
         <>
             <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -26,13 +30,14 @@ const AlertConfirmDeleteCustomer = ({ closeAlert, alertCustomerInfo, deleteCusto
                                     Delete account ?
                                 </h4>
                                 <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
-                                    Would you like to delete this customer information?
+                                    {` Would you like to delete ${alertCustomerInfo.patientLastName} ${alertCustomerInfo.patientFirstName} information? `}
+
                                 </p>
                                 <div className="items-center gap-2 mt-3 sm:flex">
                                     <button
                                         className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                         onClick={() =>
-                                            deleteCustomer(alertCustomerInfo._id)
+                                            handleDelete()
                                         }
                                     >
                                         Delete

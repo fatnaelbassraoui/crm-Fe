@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { editCustomer } from '../States/editCustomerInfoSlice'
 import { getCustomersInfoFromDB } from '../States/getCustomersInfoSlice'
+import axios from 'axios'
 
 
-const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
-    console.log(customersInfo)
+const EditCustomerInfoModal = ({ closeModalEdit, customersInformation }) => {
     const [editCustomerInfo, setEditCustomerInfo] = useState({})
-    console.log(editCustomerInfo);
 
     const dispatch = useDispatch()
 
@@ -20,14 +19,17 @@ const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
                 patientPhoneNumber: editCustomerInfo.patientPhoneNumber,
                 patientAddress: editCustomerInfo.patientAddress,
                 patientEmail: editCustomerInfo.patientEmail,
+                patientAvatar: editCustomerInfo.patientAvatar,
+
             },
-            id: customersInfo._id,
+            id: customersInformation._id,
         }
         dispatch(editCustomer(customerInfoToUpdate))
     }
     useEffect(() => {
         //useEffect viene eseguito dopo il rendering del componente
         dispatch(getCustomersInfoFromDB())
+
     }, [dispatch])
 
     return (
@@ -44,9 +46,24 @@ const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
                                     <div
                                         className="form-group mb-6">
                                         <input
+                                            type="img"
+                                            src={customersInformation.patientAvatar}
+                                            className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                            defaultValue={customersInformation.patientAvatar}
+                                            onChange={(e) => {
+                                                setEditCustomerInfo({
+                                                    ...editCustomerInfo,
+                                                    patientAvatar: e.target.value,
+                                                })
+                                            }}
+                                        />
+                                    </div>
+                                    <div
+                                        className="form-group mb-6">
+                                        <input
                                             type="text"
                                             className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                            defaultValue={customersInfo.patientFirstName}
+                                            defaultValue={customersInformation.patientFirstName}
                                             onChange={(e) => {
                                                 setEditCustomerInfo({
                                                     ...editCustomerInfo,
@@ -60,7 +77,7 @@ const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
                                         <input
                                             type="text"
                                             className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                            defaultValue={customersInfo.patientLastName}
+                                            defaultValue={customersInformation.patientLastName}
                                             onChange={(e) => {
                                                 setEditCustomerInfo({
                                                     ...editCustomerInfo,
@@ -75,7 +92,7 @@ const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
                                             datepicker
                                             type="date"
                                             className=" form-control block w-[300px] px-3  py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                            defaultValue={customersInfo.patientDateOfBirth}
+                                            defaultValue={customersInformation.patientDateOfBirth}
                                             onChange={(e) => {
                                                 setEditCustomerInfo({
                                                     ...editCustomerInfo,
@@ -88,7 +105,7 @@ const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
                                         <input
                                             type="text"
                                             className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                            defaultValue={customersInfo.patientPhoneNumber}
+                                            defaultValue={customersInformation.patientPhoneNumber}
                                             onChange={(e) => {
                                                 setEditCustomerInfo({
                                                     ...editCustomerInfo,
@@ -100,7 +117,7 @@ const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
                                     <div className="form-group mb-6">
                                         <input type="address"
                                             className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                            defaultValue={customersInfo.patientAddress}
+                                            defaultValue={customersInformation.patientAddress}
                                             onChange={(e) => {
                                                 setEditCustomerInfo({
                                                     ...editCustomerInfo,
@@ -109,11 +126,11 @@ const EditCustomerInfoModal = ({ closeModalEdit, customersInfo }) => {
                                             }}
                                         />
                                     </div>
-                                    <div class="form-group mb-6">
+                                    <div className="form-group mb-6">
                                         <input
                                             type="email"
                                             className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                            defaultValue={customersInfo.patientEmail}
+                                            defaultValue={customersInformation.patientEmail}
                                             onChange={(e) => {
                                                 setEditCustomerInfo({
                                                     ...editCustomerInfo,
