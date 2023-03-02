@@ -1,8 +1,11 @@
 import React from 'react'
 import FormCreateAccount from '../Components/FormCreateAccount'
 import imagesSignUp from '../Assets/imagesSignUp.jpg'
+import { GiReturnArrow } from 'react-icons/gi';
+import { useNavigate } from 'react-router-dom'
 
 export const SignUp = () => {
+    const navigate = useNavigate()
     return (
         <div className="h-screen">
             <div className="container px-6 py-12 h-full">
@@ -16,7 +19,14 @@ export const SignUp = () => {
                             className="w-full"
                             alt="signUp"
                         />
+
                     </div>
+
+                </div>
+                <div>
+                    <button onClick={() => navigate('../', { replace: true })}>
+                        {<GiReturnArrow />}
+                    </button>
                 </div>
             </div>
         </div>

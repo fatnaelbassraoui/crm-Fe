@@ -1,14 +1,26 @@
 import React from 'react'
 import CustomersInfoTable from '../Components/CustomersInfoTable'
-import Navbar from '../Components/Navbar'
+import Sidebar from '../Components/Sidebar'
 
 const CustomersInfo = () => {
 
     return (
-        <>
-            <Navbar />
-            <CustomersInfoTable />
-        </>
+        <div
+            className='flex h-full w-full'
+        >
+            <div
+                className='w-{30%}'
+            >
+                <Sidebar />
+            </div>
+            <div
+                className='w-[100%]'
+            >
+
+                <CustomersInfoTable />
+            </div>
+
+        </div>
 
     )
 }

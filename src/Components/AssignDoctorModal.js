@@ -20,6 +20,7 @@ const AssignDoctorModal = ({ closeModalAssignDoctor, customersInformation }) => 
                 console.log(error)
             })
     }
+
     const postAssistedByDoctor = async (data, id) => {
         return await axios
             .post(`${process.env.REACT_APP_BASEURL}/assistedByDoctor/${id}`, data)
@@ -73,7 +74,7 @@ const AssignDoctorModal = ({ closeModalAssignDoctor, customersInformation }) => 
                                             className="form-control block w-[300px] px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         >
                                             < option value="">Chose a Doctor</option>
-                                            {doctors && doctors?.map((option, index) => {
+                                            {doctors && doctors?.slice(0, 2).map((option, index) => {
                                                 const doctorValue = {
                                                     doctorId: option._id,
                                                     doctorName: option.firstName,
