@@ -4,6 +4,7 @@ import './index.css'
 import Home from './pages/Home'
 import CustomersInfo from './pages/CustomersInfo'
 import ProtectedRoutes from './Middleware/ProtectedRoutes'
+import Doctors from './pages/Doctors'
 import { SignUp } from './pages/SignUp'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
                 <Route element={<ProtectedRoutes />}>
                     <Route path="/home" element={<Home />} />
                     <Route path="/customer-info" element={<CustomersInfo />} />
+                    <Route path="/doctors-info" element={<Doctors />} />
                 </Route>
             </Routes>
         </Router>

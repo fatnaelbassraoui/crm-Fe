@@ -19,6 +19,11 @@ const FormCreateAccount = () => {
             password: formValue.password,
             userName: formValue.userName,
             email: formValue.email,
+            avatar: formValue.avatar,
+            dateOfBirth: formValue.dateOfBirth,
+            phoneNumber: formValue.phoneNumber,
+            address: formValue.address,
+
         },
     }
     console.log(userData)
@@ -37,6 +42,20 @@ const FormCreateAccount = () => {
                 onSubmit={handleAddUser}
                 className=" grid justify-center items-center gap-4 pt-6 pb-4"
             >
+                <div className="mb-3  w-[300px]">
+                    <input
+                        type="img"
+                        src={formValue.patientAvatar}
+                        className="form-control block w-[300px] h-cover px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder='Avatar'
+                        onChange={(e) => {
+                            setFormValue({
+                                ...formValue,
+                                patientAvatar: e.target.value,
+                            })
+                        }}
+                    />
+                </div>
                 <div className="mb-3  w-[300px]">
                     <input
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -92,6 +111,19 @@ const FormCreateAccount = () => {
                 <div className="mb-3">
                     <input
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        datepicker="true"
+                        type="date"
+                        onChange={(e) =>
+                            setFormValue({
+                                ...formValue,
+                                dateOfBirth: e.target.value,
+                            }
+                            )}
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         type="email"
                         placeholder="email"
                         onChange={(e) =>
@@ -100,6 +132,32 @@ const FormCreateAccount = () => {
                                 email: e.target.value,
                             })
                         }
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="text"
+                        placeholder="Phone Number"
+                        onChange={(e) =>
+                            setFormValue({
+                                ...formValue,
+                                phoneNumber: e.target.value,
+                            }
+                            )}
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="text"
+                        placeholder="Address"
+                        onChange={(e) =>
+                            setFormValue({
+                                ...formValue,
+                                address: e.target.value,
+                            }
+                            )}
                     />
                 </div>
 

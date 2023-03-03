@@ -83,21 +83,27 @@ const CustomersInfoTable = () => {
                 {isLoading && !error && <h1>Loading...</h1>}
                 {error && !isLoading && <h1>Ops an error is occurred..</h1>}
 
-                {showAddCustomerModal && admin === 'admin' && <AddNewCustomersModal closeModal={setShowAddCustomerModal} />}
+                {showAddCustomerModal && <AddNewCustomersModal closeModal={setShowAddCustomerModal} />}
 
                 <table className="min-w-full">
                     <thead className="border-b bg-blue-100 border-blue-200 ">
                         <tr>
                             <th scope="col" className=" text-sm font-medium text-gray-900 px-6 py-4 text-center">
-                                <button
-                                    onClick={() => {
-                                        setShowAddCustomerModal(true)
-                                    }}
-                                    className=" w-[40px] h-[40px] rounded-full bg-green-500   shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out  text-white font-medium text-2xl leading-snug "
-                                >
-                                    +
-                                </button>
+                                {admin === 'admin' ?
+                                    <button
+                                        onClick={() => {
+                                            setShowAddCustomerModal(true)
+                                        }}
+                                        className=" w-[40px] h-[40px] rounded-full bg-green-500   shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out  text-white font-medium text-2xl leading-snug "
+                                    >
+                                        +
+                                    </button> :
+                                    <p scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                                        Avatar
+                                    </p>}
+
                             </th>
+
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
                                 First Name
                             </th>
@@ -113,12 +119,14 @@ const CustomersInfoTable = () => {
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
                                 Read More
                             </th>
-                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
-                                Actions
-                            </th>
-                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
-                                Assign doctor
-                            </th>
+                            {admin === 'admin' &&
+                                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                                    Actions
+                                </th>}
+                            {admin === 'admin' &&
+                                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                                    Assign doctor
+                                </th>}
                         </tr>
                     </thead>
 
@@ -167,7 +175,7 @@ const CustomersInfoTable = () => {
                                                 </button>
 
                                             </td>
-                                            <td
+                                            {admin === 'admin' && <td
                                                 className='text-center item-center m-auto'>
                                                 <button
                                                     onClick={() => handleDeleteCustomer(customer, customer._id)}
@@ -184,8 +192,8 @@ const CustomersInfoTable = () => {
                                                 >
                                                     <FaRegEdit />
                                                 </button>
-                                            </td>
-                                            <td
+                                            </td>}
+                                            {admin === 'admin' && <td
                                                 className='text-center'
                                             >
                                                 <button
@@ -199,12 +207,12 @@ const CustomersInfoTable = () => {
                                                     />
                                                 </button>
 
-                                            </td>
+                                            </td>}
                                         </tr>
                                         {ShowModal && <CustomersInfoModal closeModal={setShowModal} customersInfo={customerInfo} />}
-                                        {showAlert && admin === 'admin' && <AlertConfirmDeleteCustomer closeAlert={setShowAlert} alertCustomerInfo={customerInfoDelete} deleteCustomerInfo={handleDeleteCustomer} />}
-                                        {showModalEditCustomer && admin === 'admin' && <EditCustomerInfoModal closeModalEdit={setShowModalEditCustomer} customersInformation={customerInfoEdit} />}
-                                        {showModalAssignDoctor && admin === 'admin' && <AssignDoctorModal closeModalAssignDoctor={setShowModalAssignDoctor} customersInformation={customerInfo} />}
+                                        {showAlert && <AlertConfirmDeleteCustomer closeAlert={setShowAlert} alertCustomerInfo={customerInfoDelete} deleteCustomerInfo={handleDeleteCustomer} />}
+                                        {showModalEditCustomer && <EditCustomerInfoModal closeModalEdit={setShowModalEditCustomer} customersInformation={customerInfoEdit} />}
+                                        {showModalAssignDoctor && <AssignDoctorModal closeModalAssignDoctor={setShowModalAssignDoctor} customersInformation={customerInfo} />}
                                     </tbody>
                                 )
                             })}
